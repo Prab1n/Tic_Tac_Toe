@@ -46,9 +46,9 @@ public class GameManager : MonoBehaviour
             hasBeenClicked = true;*/
             GameObject currentlySelectedGO = EventSystem.current.currentSelectedGameObject.gameObject;      //this gives the currently selected game object
 
-            /*string test = currentlySelectedGO.transform.GetChild(0).GetComponent<TMP_Text>().text;
-            Debug.Log("check" + test);*/
-            if (click % 2 != 0)     //checking condition for even 
+        string test = currentlySelectedGO.transform.GetChild(0).GetComponent<TMP_Text>().text;
+        Debug.Log("check" + test);
+        if (click % 2 != 0)     //checking condition for even 
             {
                 currentlySelectedGO.transform.GetChild(0).GetComponent<TMP_Text>().text = "O";
                 Debug.Log("Even");
