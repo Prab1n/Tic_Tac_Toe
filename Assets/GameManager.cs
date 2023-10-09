@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -23,15 +24,22 @@ public class GameManager : MonoBehaviour
     public string gameObjectName8;      //creating a string for button 3x2 to store its text 
     public string gameObjectName9;      //creating a string for button 3x3 to store its text 
 
+    int ScoreX = 0;
+    int ScoreO = 0;
+
+    
+    GameObject WinnerX;
+
 
 
     int click = 0;          //setting value of click count to 0
     // Start is called before the first frame update
     void Start()
     {
-       /* button = GetComponent<Button>();
-        button.onClick.AddListener(OnButtonClick);*/
 
+        WinnerX = GameObject.Find("Xwins");
+        WinnerX.SetActive(false);
+        
     }
 
     // Update is called once per frame
@@ -39,12 +47,16 @@ public class GameManager : MonoBehaviour
     {
         
     }
+
+    
     public void OnButtonClick() 
     {
         /*if (!hasBeenClicked)
         {
-            hasBeenClicked = true;*/
-            GameObject currentlySelectedGO = EventSystem.current.currentSelectedGameObject.gameObject;      //this gives the currently selected game object
+         
+        hasBeenClicked = true;*/
+        
+        GameObject currentlySelectedGO = EventSystem.current.currentSelectedGameObject.gameObject;      //this gives the currently selected game object
 
         string test = currentlySelectedGO.transform.GetChild(0).GetComponent<TMP_Text>().text;
         Debug.Log("check" + test);
@@ -83,36 +95,115 @@ public class GameManager : MonoBehaviour
 
 
             if ((gameObjectName1 == gameObjectName2) && (gameObjectName3 == gameObjectName1) && (gameObjectName1 == "X" || gameObjectName1 == "O"))     //checking condition for winning the game
+            {   
+                if (gameObjectName1 == "X") 
             {
+               
+                Debug.Log("X ko winning condition ma pugyo ?");
+                ScoreX++;
+                Debug.Log("yo chai X ko score" + ScoreX);
+                TMP_Text TextOfX = GameObject.Find("ScoreOfX").GetComponent<TMP_Text>();
+
+                TextOfX.text = ScoreX.ToString();
+
+                WinnerX.SetActive(true);
+
+
+
+
+            }
+                else
+            {
+                ScoreO++;
+                TMP_Text TextOfO = GameObject.Find("ScoreOfO").GetComponent<TMP_Text>();
+
+                TextOfO.text = ScoreO.ToString();
+            }
                 Debug.Log("Condition 1 GAME OVER !!!!");
             }
             else if ((gameObjectName1 == gameObjectName4) && (gameObjectName7 == gameObjectName1) && (gameObjectName1 == "X" || gameObjectName1 == "O"))    //checking condition for winning the game   
             {
-                Debug.Log("Condition 2 GAME OVER !!!!");
+            if (gameObjectName1 == "X")
+            {
+                ScoreX++;
+            }
+            else
+            {
+                ScoreO++;
+            }
+            Debug.Log("Condition 2 GAME OVER !!!!");
             }
             else if ((gameObjectName1 == gameObjectName5) && (gameObjectName9 == gameObjectName1) && (gameObjectName1 == "X" || gameObjectName1 == "O"))    //checking condition for winning the game
             {
-                Debug.Log("Condition 3 GAME OVER !!!!");
+            if (gameObjectName1 == "X")
+            {
+                ScoreX++;
+            }
+            else
+            {
+                ScoreO++;
+            }
+            Debug.Log("Condition 3 GAME OVER !!!!");
             }
             else if ((gameObjectName4 == gameObjectName5) && (gameObjectName6 == gameObjectName4) && (gameObjectName4 == "X" || gameObjectName4 == "O"))    //checking condition for winning the game
             {
-                Debug.Log("Condition 4 GAME OVER !!!!");
+            if (gameObjectName4 == "X")
+            {
+                ScoreX++;
+            }
+            else
+            {
+                ScoreO++;
+            }
+            Debug.Log("Condition 4 GAME OVER !!!!");
             }
             else if ((gameObjectName7 == gameObjectName8) && (gameObjectName9 == gameObjectName7) && (gameObjectName7 == "X" || gameObjectName7 == "O"))    //checking condition for winning the game
             {
-                Debug.Log("Condition 5 GAME OVER !!!!");
+            if (gameObjectName7 == "X")
+            {
+                ScoreX++;
+            }
+            else
+            {
+                ScoreO++;
+            }
+            Debug.Log("Condition 5 GAME OVER !!!!");
             }
             else if ((gameObjectName7 == gameObjectName5) && (gameObjectName3 == gameObjectName7) && (gameObjectName7 == "X" || gameObjectName7 == "O"))    //checking condition for winning the game
             {
-                Debug.Log("Condition 6 GAME OVER !!!!");
+            if (gameObjectName7 == "X")
+            {
+                ScoreX++;
+            }
+            else
+            {
+                ScoreO++;
+            }
+            Debug.Log("Condition 6 GAME OVER !!!!");
             }
             else if ((gameObjectName2 == gameObjectName5) && (gameObjectName8 == gameObjectName2) && (gameObjectName2 == "X" || gameObjectName2 == "O"))    //checking condition for winning the game
             {
-                Debug.Log("Condition 7 GAME OVER !!!!");
+            if (gameObjectName2 == "X")
+            {
+                ScoreX++;
+            }
+            else
+            {
+                ScoreO++;
+            }
+            Debug.Log("Condition 7 GAME OVER !!!!");
             }
             else if ((gameObjectName3 == gameObjectName6) && (gameObjectName9 == gameObjectName3) && (gameObjectName3 == "X" || gameObjectName3 == "O")) //checking condition for winning the game
             {
-                Debug.Log("Condition 8 GAME OVER !!!!");
+            if (gameObjectName3 == "X")
+            {
+                ScoreX++;
+            }
+            else
+            {
+                ScoreO++;
+            }
+            Debug.Log("Condition 8 GAME OVER !!!!");
             }
 
            
