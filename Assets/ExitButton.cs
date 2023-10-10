@@ -9,10 +9,7 @@ public class ExitButton : MonoBehaviour
 
     public void Awake()
     {
-        GameObject ToStoreScoreOfX =GameObject.Find("ScoreOfX");
-        DontDestroyOnLoad(ToStoreScoreOfX);
-        GameObject ToStoreScoreOfO = GameObject.Find("ScoreOfO");
-        DontDestroyOnLoad(ToStoreScoreOfO);
+        
     }
 
     public void ExitGame()

@@ -4,6 +4,7 @@ using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static UnityEngine.UI.Image;
 
@@ -29,17 +30,40 @@ public class GameManager : MonoBehaviour
 
     
     GameObject WinnerX;
+    GameObject WinnerO;
+    GameObject DrawGame;
+
+    public TMP_Text playerXScoreText;
+    public TMP_Text playerOScoreText;
 
 
 
-    int click = 0;          //setting value of click count to 0
+    int click = 0;
+
+    private void Awake()
+    {
+        
+    }
+    //setting value of click count to 0
     // Start is called before the first frame update
     void Start()
     {
+        /*LoadScores();*/
+        /*GameObject X = GameObject.Find("ScoreOfX");
+        DontDestroyOnLoad(X);*/
 
         WinnerX = GameObject.Find("Xwins");
         WinnerX.SetActive(false);
-        
+
+        WinnerO = GameObject.Find("Owins");
+        WinnerO.SetActive(false);
+
+        DrawGame = GameObject.Find("Draw");
+        DrawGame.SetActive(false);
+
+        UpdateScoreOnUI();
+
+
     }
 
     // Update is called once per frame
@@ -94,122 +118,213 @@ public class GameManager : MonoBehaviour
             gameObjectName9 = gameObjectList[8].transform.GetChild(0).GetComponent<TMP_Text>().text;    //storing the 3x3 button text in gameObjectName9
 
 
-            if ((gameObjectName1 == gameObjectName2) && (gameObjectName3 == gameObjectName1) && (gameObjectName1 == "X" || gameObjectName1 == "O"))     //checking condition for winning the game
-            {   
-                if (gameObjectName1 == "X") 
+        if ((gameObjectName1 == gameObjectName2) && (gameObjectName3 == gameObjectName1) && (gameObjectName1 == "X" || gameObjectName1 == "O"))     //checking condition for winning the game
+        {
+            if (gameObjectName1 == "X")
             {
-               
+
                 Debug.Log("X ko winning condition ma pugyo ?");
                 ScoreX++;
                 Debug.Log("yo chai X ko score" + ScoreX);
-                TMP_Text TextOfX = GameObject.Find("ScoreOfX").GetComponent<TMP_Text>();
+                UpdateScoreOnUI();
 
-                TextOfX.text = ScoreX.ToString();
 
                 WinnerX.SetActive(true);
-
-
-
-
-            }
-                else
-            {
-                ScoreO++;
-                TMP_Text TextOfO = GameObject.Find("ScoreOfO").GetComponent<TMP_Text>();
-
-                TextOfO.text = ScoreO.ToString();
-            }
-                Debug.Log("Condition 1 GAME OVER !!!!");
-            }
-            else if ((gameObjectName1 == gameObjectName4) && (gameObjectName7 == gameObjectName1) && (gameObjectName1 == "X" || gameObjectName1 == "O"))    //checking condition for winning the game   
-            {
-            if (gameObjectName1 == "X")
-            {
-                ScoreX++;
+                StartCoroutine(ResetGameAfterDelay());
             }
             else
             {
                 ScoreO++;
+                UpdateScoreOnUI();
+                WinnerO.SetActive(true);
+                StartCoroutine(ResetGameAfterDelay());
+            }
+            Debug.Log("Condition 1 GAME OVER !!!!");
+        }
+        else if ((gameObjectName1 == gameObjectName4) && (gameObjectName7 == gameObjectName1) && (gameObjectName1 == "X" || gameObjectName1 == "O"))    //checking condition for winning the game   
+        {
+            if (gameObjectName1 == "X")
+            {
+                ScoreX++;
+                UpdateScoreOnUI();
+                WinnerX.SetActive(true);
+                StartCoroutine(ResetGameAfterDelay());
+            }
+            else
+            {
+                ScoreO++;
+                UpdateScoreOnUI();
+                WinnerO.SetActive(true);
+                StartCoroutine(ResetGameAfterDelay());
+
             }
             Debug.Log("Condition 2 GAME OVER !!!!");
-            }
-            else if ((gameObjectName1 == gameObjectName5) && (gameObjectName9 == gameObjectName1) && (gameObjectName1 == "X" || gameObjectName1 == "O"))    //checking condition for winning the game
-            {
+        }
+        else if ((gameObjectName1 == gameObjectName5) && (gameObjectName9 == gameObjectName1) && (gameObjectName1 == "X" || gameObjectName1 == "O"))    //checking condition for winning the game
+        {
             if (gameObjectName1 == "X")
             {
                 ScoreX++;
+                UpdateScoreOnUI();
+                WinnerX.SetActive(true);
+                StartCoroutine(ResetGameAfterDelay());
             }
             else
             {
                 ScoreO++;
+                UpdateScoreOnUI();
+                WinnerO.SetActive(true);
+                StartCoroutine(ResetGameAfterDelay());
             }
             Debug.Log("Condition 3 GAME OVER !!!!");
-            }
-            else if ((gameObjectName4 == gameObjectName5) && (gameObjectName6 == gameObjectName4) && (gameObjectName4 == "X" || gameObjectName4 == "O"))    //checking condition for winning the game
-            {
+        }
+        else if ((gameObjectName4 == gameObjectName5) && (gameObjectName6 == gameObjectName4) && (gameObjectName4 == "X" || gameObjectName4 == "O"))    //checking condition for winning the game
+        {
             if (gameObjectName4 == "X")
             {
                 ScoreX++;
+                UpdateScoreOnUI();
+                WinnerX.SetActive(true);
+                StartCoroutine(ResetGameAfterDelay());
             }
             else
             {
                 ScoreO++;
+                UpdateScoreOnUI();
+                WinnerO.SetActive(true);
+                StartCoroutine(ResetGameAfterDelay());
             }
             Debug.Log("Condition 4 GAME OVER !!!!");
-            }
-            else if ((gameObjectName7 == gameObjectName8) && (gameObjectName9 == gameObjectName7) && (gameObjectName7 == "X" || gameObjectName7 == "O"))    //checking condition for winning the game
-            {
+        }
+        else if ((gameObjectName7 == gameObjectName8) && (gameObjectName9 == gameObjectName7) && (gameObjectName7 == "X" || gameObjectName7 == "O"))    //checking condition for winning the game
+        {
             if (gameObjectName7 == "X")
             {
                 ScoreX++;
+                UpdateScoreOnUI();
+                WinnerX.SetActive(true);
+                StartCoroutine(ResetGameAfterDelay());
             }
             else
             {
                 ScoreO++;
+                UpdateScoreOnUI();
+                WinnerO.SetActive(true);
+                StartCoroutine(ResetGameAfterDelay());
             }
             Debug.Log("Condition 5 GAME OVER !!!!");
-            }
-            else if ((gameObjectName7 == gameObjectName5) && (gameObjectName3 == gameObjectName7) && (gameObjectName7 == "X" || gameObjectName7 == "O"))    //checking condition for winning the game
-            {
+        }
+        else if ((gameObjectName7 == gameObjectName5) && (gameObjectName3 == gameObjectName7) && (gameObjectName7 == "X" || gameObjectName7 == "O"))    //checking condition for winning the game
+        {
             if (gameObjectName7 == "X")
             {
                 ScoreX++;
+                UpdateScoreOnUI();
+                WinnerX.SetActive(true);
+                StartCoroutine(ResetGameAfterDelay());
             }
             else
             {
                 ScoreO++;
+                UpdateScoreOnUI();
+                WinnerO.SetActive(true);
+                StartCoroutine(ResetGameAfterDelay());
             }
             Debug.Log("Condition 6 GAME OVER !!!!");
-            }
-            else if ((gameObjectName2 == gameObjectName5) && (gameObjectName8 == gameObjectName2) && (gameObjectName2 == "X" || gameObjectName2 == "O"))    //checking condition for winning the game
-            {
+        }
+        else if ((gameObjectName2 == gameObjectName5) && (gameObjectName8 == gameObjectName2) && (gameObjectName2 == "X" || gameObjectName2 == "O"))    //checking condition for winning the game
+        {
             if (gameObjectName2 == "X")
             {
                 ScoreX++;
+                UpdateScoreOnUI();
+                WinnerX.SetActive(true);
+                StartCoroutine(ResetGameAfterDelay());
             }
             else
             {
                 ScoreO++;
+                UpdateScoreOnUI();
+                WinnerO.SetActive(true);
+                StartCoroutine(ResetGameAfterDelay());
             }
             Debug.Log("Condition 7 GAME OVER !!!!");
-            }
-            else if ((gameObjectName3 == gameObjectName6) && (gameObjectName9 == gameObjectName3) && (gameObjectName3 == "X" || gameObjectName3 == "O")) //checking condition for winning the game
-            {
+        }
+        else if ((gameObjectName3 == gameObjectName6) && (gameObjectName9 == gameObjectName3) && (gameObjectName3 == "X" || gameObjectName3 == "O")) //checking condition for winning the game
+        {
             if (gameObjectName3 == "X")
             {
                 ScoreX++;
+                UpdateScoreOnUI();
+                WinnerX.SetActive(true);
+                StartCoroutine(ResetGameAfterDelay());
             }
             else
             {
                 ScoreO++;
+                UpdateScoreOnUI();
+                WinnerO.SetActive(true);
+                StartCoroutine(ResetGameAfterDelay());
             }
             Debug.Log("Condition 8 GAME OVER !!!!");
-            }
+        }
+        else if (click == 9)
+        {
+            UpdateScoreOnUI();
+            DrawGame.SetActive(true);
+            StartCoroutine(ResetGameAfterDelay());
+        }
+        
 
-           
+       
 
         
 
+
+
+
+
+
+    }
+    IEnumerator ResetGameAfterDelay()
+    {
+        yield return new WaitForSeconds(5f); // Wait for 5 seconds
+        ResetGame(); // Reset the game after the delay
+    }
+    void ResetGame()
+    {
+
+        
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         
     }
+
+
+    void UpdateScoreOnUI()
+    {
+        TMP_Text TextOfX = GameObject.Find("ScoreOfX").GetComponent<TMP_Text>();
+        TextOfX.text = ScoreX.ToString();
+
+
+        TMP_Text TextOfO = GameObject.Find("ScoreOfO").GetComponent<TMP_Text>();
+        TextOfO.text = ScoreO.ToString();
+
+
+    }
+
+   /* void LoadScores()
+    {
+        ScoreX = PlayerPrefs.GetInt("ScoreOfX", 0);
+        ScoreO = PlayerPrefs.GetInt("ScoreOfO", 0);
+
+        UpdateScoreOnUI();
+    }
+
+    void SaveScores()
+    {
+        PlayerPrefs.SetInt("ScoreOfX", ScoreX);
+        PlayerPrefs.SetInt("ScoreOfO", ScoreO);
+        PlayerPrefs.Save();
+    }*/
 }
