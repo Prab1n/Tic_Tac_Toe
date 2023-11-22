@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class ButtonController : MonoBehaviour
 {
     private Button button;
-    private bool hasBeenClicked = false;
+    public bool hasBeenClicked = false;
 
     void Start()
     {
